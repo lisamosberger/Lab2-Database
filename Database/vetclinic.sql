@@ -105,3 +105,10 @@ select p.pet_name, s.species_name
 from pet p join species s
 on s.species_id = p.species_id;
 
+
+select * from pet;
+select * from visit;
+select  * from owner;
+select * from species;
+
+
