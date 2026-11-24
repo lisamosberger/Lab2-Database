@@ -23,3 +23,13 @@ insert into owner ( owner_name, owner_phone)
 value ('Fred Karlsson', '070-111 11 11');
 ```
 `[23000][1062] Duplicate entry '070-111 11 11' for key 'owner.owner_phone'`
+
+## Part D: Advanced (VG)
+
+**Task 10** When not to normalize  
+**Normalization** means organizing data a database so that each piece of information 
+is stored only once. We split the data into several tables and connect them with 
+keys. This avoids repeated data and mistakes when we update, add or delete data.
+
+In some situations it is better not to normalize, for example when putting a price. 
+If a person paid a fee last week, and the clinic changes the price this week to another one. The fee from last week would also update to the new one and old saved data would be changed. Therefore, we store the fee in every visit, even tho similar prices are repeated. Additionally, reading data is faster than writing data. Reading data is easier if it is already stored together, without extra joins or changes. 
