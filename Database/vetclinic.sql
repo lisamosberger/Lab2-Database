@@ -81,3 +81,29 @@ commit;
 select p.pet_name, p.species, o.owner_id, o.owner_name
 from pet p join owner o on o.owner_id = p.owner_id;
 
+-- Task 9: species table and forgein key in pet
+create table if not exists species (
+    species_id int auto_increment primary key,
+    species_name varchar(50) not null unique
+);
+
+insert into species (species_name)
+values ('Hund'),
+        ('Katt'),
+        ('Kanin');
+
+alter table pet
+    add column species_id int,
+    add foreign key (species_id) references species (species_id);
+
+update pet p
+join species s on s.species_name = p.species
+set p.species_id = s.species_id;
+
+alter table pet modify species_id int not null;
+alter table pet drop column species;
+
+select p.pet_name, s.species_name
+from pet p join species s
+on s.species_id = p.species_id;
+
