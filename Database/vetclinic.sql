@@ -47,6 +47,10 @@ values ('2026-01-10','Vaccination',450,(select pet_id from pet where pet_name = 
        ('2026-02-28','Tandkontroll',350,(select pet_id from pet where pet_name = 'Pelle')),
        ('2026-10-15','Vaccination',450,(select pet_id from pet where pet_name = 'Luna'));
 
+select count(*) from owner;
+select count(*) from pet;
+select count(*) from visit;
+
 -- Breaking against two rules
 /*
 - Fee can't be below 0:
@@ -59,7 +63,3 @@ value ('2026-03-15', 'Vaccination', -200, (select pet_id from pet where pet_name
 insert into owner ( owner_name, owner_phone)
 value ('Fred Karlsson', '070-111 11 11');
  */
-
-select count(*) from owner;
-select count(*) from pet;
-select count(*) from visit;
