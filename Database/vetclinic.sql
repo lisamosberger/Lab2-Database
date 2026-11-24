@@ -51,7 +51,7 @@ select count(*) from owner;
 select count(*) from pet;
 select count(*) from visit;
 
--- Breaking against two rules
+-- Task 5: Breaking against two rules
 /*
 - Fee can't be below 0:
 insert into visit (visit_date, diagnosis, fee, pet_id)
@@ -63,3 +63,21 @@ value ('2026-03-15', 'Vaccination', -200, (select pet_id from pet where pet_name
 insert into owner ( owner_name, owner_phone)
 value ('Fred Karlsson', '070-111 11 11');
  */
+
+-- Task 6: insert a new owner and move a pet to the new owner.
+select p.pet_name, p.species, o.owner_id, o.owner_name
+from pet p join owner o on o.owner_id = p.owner_id;
+
+start transaction;
+
+insert into owner (owner_name, owner_phone)
+value ('Maja Larsson', '073-456 93 54');
+
+update pet set owner_id = last_insert_id()
+where pet_name = 'Bella';
+
+commit;
+
+select p.pet_name, p.species, o.owner_id, o.owner_name
+from pet p join owner o on o.owner_id = p.owner_id;
+
