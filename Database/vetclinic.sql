@@ -88,9 +88,7 @@ create table if not exists species (
 );
 
 insert into species (species_name)
-values ('Hund'),
-        ('Katt'),
-        ('Kanin');
+select distinct species from pet;
 
 alter table pet
     add column species_id int,
