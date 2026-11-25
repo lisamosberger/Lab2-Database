@@ -47,6 +47,18 @@ values ('2026-01-10','Vaccination',450,(select pet_id from pet where pet_name = 
        ('2026-02-28','Tandkontroll',350,(select pet_id from pet where pet_name = 'Pelle')),
        ('2026-10-15','Vaccination',450,(select pet_id from pet where pet_name = 'Luna'));
 
+-- not needed in lab, but new visits can't be put in the past anymore
+delimiter $$
+create trigger visit_date_cant_be_before_today
+    before insert on visit
+    for each row
+    begin if new.visit_date < curdate() then
+        signal sqlstate '45000'
+        set message_text = 'Visit date can not be before today';
+    end if;
+end $$
+delimiter ;
+
 select count(*) from owner;
 select count(*) from pet;
 select count(*) from visit;
